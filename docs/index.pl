@@ -30,10 +30,7 @@ if ($error) {
 my $accept = I18N::AcceptLanguage->new(defaultLanguage => $lang);
 my $acceptLang = $accept->accepts($ENV{HTTP_ACCEPT_LANGUAGE}, \@langs);
 my $cookie;
-if ($q->param('lang') ~~ @langs) {
-    $lang = $q->param('lang');
-    $cookie = $q->cookie(-name => 'lang', value => $lang);
-} elsif ($q->cookie('lang') ~~ @langs) {
+if ($q->cookie('lang') ~~ @langs) {
     $lang = $q->cookie('lang');
 } elsif ($acceptLang) {
     $lang = $acceptLang;

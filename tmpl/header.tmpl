@@ -14,7 +14,7 @@
 		<div class="container">
 			<div class="pull-right">
 				<TMPL_LOOP NAME=LANGS_LOOP>
-				<a href="?lang=<TMPL_VAR NAME=CODE>"><img <TMPL_IF NAME=SELECTED>class="img-polaroid" </TMPL_IF>src="img/<TMPL_VAR NAME=CODE>.png" alt="<TMPL_VAR NAME=CODE>"></a>
+				<a href="#" onclick="setLanguage('<TMPL_VAR NAME=CODE>'); return false;"><img <TMPL_IF NAME=SELECTED>class="img-polaroid" </TMPL_IF>src="img/<TMPL_VAR NAME=CODE>.png" alt="<TMPL_VAR NAME=CODE>"></a>
 				</TMPL_LOOP>
 			</div>
 			<div class="page-header">
