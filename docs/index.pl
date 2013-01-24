@@ -10,6 +10,8 @@ use Locale::TextDomain;
 use Imager::QRCode;
 use SVG qw/-nocredits => 1/;
 
+my $tmpldir = "$ENV{BASE_DIRECTORY}/tmpl";
+
 my $charset = 'UTF-8';
 my @langs = qw/en da/;
 my $lang = 'en';
@@ -37,9 +39,15 @@ if ($q->param('lang') ~~ @langs) {
     $lang = $acceptLang;
 }
 
+# Print header
+print $q->header(-cookie => $cookie);
+
 # set template lang
 
 # check page param, prepare template and present content
 
-print $q->header(-cookie => $cookie);
-print "lang=$lang\n";
+my $tmpl = HTML::Template->new(path => [$tmpldir],
+                               filename => "$tmpldir/index.tmpl",
+                               utf8 => 1,
+                               cache => 1);
+print $tmpl->output;
