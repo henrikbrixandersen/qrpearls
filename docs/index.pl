@@ -50,6 +50,15 @@ my $tmpl = HTML::Template->new(path => [$tmpldir],
                                filename => "$tmpldir/index.tmpl",
                                utf8 => 1,
                                cache => 1);
-$tmpl->param(LANG => $lang);
 
+# Fill in template language parameters
+my @langs_loop;
+foreach my $l (@langs) {
+    my %lang_data = ( CODE => $l, SELECTED => ($l eq $lang ? 1 : 0) );
+    push @langs_loop, \%lang_data;
+}
+$tmpl->param(LANG => $lang,
+             LANGS_LOOP => \@langs_loop);
+
+# Print filled-in template
 print $tmpl->output;

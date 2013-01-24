@@ -13,8 +13,9 @@
   <body>
 		<div class="container">
 			<div class="pull-right">
-				<a href="?lang=da"><img src="img/dk.png" alt="Dansk"></a>
-				<a href="?lang=en"><img src="img/gb.png" alt="English"></a>
+				<TMPL_LOOP NAME=LANGS_LOOP>
+				<a href="?lang=<TMPL_VAR NAME=CODE>"><img <TMPL_IF NAME=SELECTED>class="img-polaroid" </TMPL_IF>src="img/<TMPL_VAR NAME=CODE>.png" alt="<TMPL_VAR NAME=CODE>"></a>
+				</TMPL_LOOP>
 			</div>
 			<div class="page-header">
 				<ul class="nav nav-pills pull-right">
