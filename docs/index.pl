@@ -50,4 +50,6 @@ my $tmpl = HTML::Template->new(path => [$tmpldir],
                                filename => "$tmpldir/index.tmpl",
                                utf8 => 1,
                                cache => 1);
+$tmpl->param(LANG => $lang);
+
 print $tmpl->output;
