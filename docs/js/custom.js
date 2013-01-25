@@ -15,6 +15,11 @@ $("#alert-no-text-close").click(function() {
 });
 
 /**
+ * Text typeahead choices.
+ */
+$("#inputText").typeahead({source: ['http://', 'https://', 'mailto:', 'tel:', 'sms:', 'mms:']});
+
+/**
  * Form submit handler.
  */
 $("#form").submit(function() {
