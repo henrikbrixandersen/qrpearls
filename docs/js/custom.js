@@ -20,7 +20,6 @@ $("#alert-no-text-close").click(function() {
 $("#form").submit(function() {
     if ($("#inputText").val().length == 0) {
       $("#alert-no-text").fadeIn();
-      $("#inputText").focus();
       return false;
     }
 
