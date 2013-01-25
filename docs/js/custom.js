@@ -1,4 +1,8 @@
-function setLanguage(code) {
-  document.cookie="lang=" + code;
-  location.reload();
-}
+/**
+ * Attach language selection handler.
+ */
+$(".lang-select").click(function() {
+    document.cookie="lang=" + $(this).data('lang');
+    location.reload();
+    return false;
+});
