@@ -27,17 +27,16 @@ if ($error) {
 }
 
 # Determine language
-my $accept = I18N::AcceptLanguage->new(defaultLanguage => $lang);
-my $acceptLang = $accept->accepts($ENV{HTTP_ACCEPT_LANGUAGE}, \@langs);
-my $cookie;
 if ($q->cookie('lang') ~~ @langs) {
     $lang = $q->cookie('lang');
-} elsif ($acceptLang) {
-    $lang = $acceptLang;
+} else {
+    my $accept = I18N::AcceptLanguage->new(defaultLanguage => $lang);
+    my $acceptLang = $accept->accepts($ENV{HTTP_ACCEPT_LANGUAGE}, \@langs);
+    $lang = $acceptLang if ($acceptLang);
 }
 
 # Print header
-print $q->header(-cookie => $cookie);
+print $q->header;
 
 # set template lang
 
