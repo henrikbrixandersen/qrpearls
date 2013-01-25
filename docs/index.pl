@@ -43,7 +43,7 @@ print $q->header;
 # check page param, prepare template and present content
 
 my $tmpl = HTML::Template->new(path => [$tmpldir],
-                               filename => "$tmpldir/index.tmpl",
+                               filename => 'index.tmpl',
                                utf8 => 1,
                                cache => 1);
 
