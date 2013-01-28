@@ -14,13 +14,14 @@
 		<div class="container">
 			<div class="pull-right">
 				<TMPL_LOOP NAME=LANGS_LOOP>
-				<a href="#" class="lang-select" data-lang="<TMPL_VAR NAME=LANG>"><img <TMPL_IF NAME=SELECTED>class="img-polaroid" </TMPL_IF>src="/img/<TMPL_VAR NAME=LANG>.png" alt="<TMPL_VAR NAME=LANG>"></a>
+					<a href="#" class="lang-select" data-lang="<TMPL_VAR NAME=LANG>"><img <TMPL_IF NAME=SELECTED>class="img-polaroid" </TMPL_IF>src="/img/<TMPL_VAR NAME=LANG>.png" alt="<TMPL_VAR NAME=NAME>"></a>
 				</TMPL_LOOP>
 			</div>
 			<div class="page-header">
 				<ul class="nav nav-pills pull-right">
-					<li class="active"><a href="#"><i class="icon-home icon-white"></i> Home</a></li>
-					<li><a href="#"><i class="icon-book"></i> About</a></li>
+					<TMPL_LOOP NAME=PAGES_LOOP>
+						<li<TMPL_IF NAME=SELECTED> class="active"</TMPL_IF>><a href="<TMPL_VAR NAME=PATH>"><i class="icon-<TMPL_VAR NAME=ICON>"></i> <TMPL_VAR NAME=NAME></a></li>
+					</TMPL_LOOP>
 				</ul>
 				<h1>QR Beads <small>A QR Code Beads Design Generator</small></h1>
 			</div>
