@@ -7,8 +7,6 @@ use I18N::AcceptLanguage;
 use HTML::Template;
 use HTML::Template::Expr;
 use Locale::TextDomain;
-use Imager::QRCode;
-use SVG qw/-nocredits => 1/;
 
 # Directories
 my $tmpldir = "$ENV{BASE_DIRECTORY}/tmpl";
