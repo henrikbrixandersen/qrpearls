@@ -31,6 +31,9 @@ $(document).ready(function() {
 	  $('#modal-preview').modal({remote: '/qrcode.pl?' + $('#form').serialize()});
 	}
       });
+    $('#modal-preview').on('hidden', function() {
+	$(this).removeData('modal');
+      });
 
     // Form submit handler.
     $('#form').submit(function() {
