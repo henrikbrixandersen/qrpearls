@@ -6,6 +6,7 @@ use CGI qw/-utf8/;
 use Locale::TextDomain;
 use Imager::QRCode;
 use SVG qw/-nocredits => 1/;
+use PDF::API2;
 
 # QR code defaults
 my $preview = 0;
@@ -91,5 +92,13 @@ if ($preview) {
     print $svg->xmlify;
 } else {
     # Generate PDF
-    # TODO
+    my $pdf = PDF::API2->new();
+    my $page = $pdf->page;
+
+    # TODO: Fill in PDF
+
+    print $q->header(-expires => '0',
+                     -type => 'application/pdf',
+                     -attachment => 'QR Code.pdf');
+    print $pdf->stringify;
 }
