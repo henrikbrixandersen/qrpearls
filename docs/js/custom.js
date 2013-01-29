@@ -31,6 +31,12 @@ jQuery(function($) {
 	  $('#modal-preview').modal({remote: '/qrcode.pl?preview=1&' + $('#form').serialize()});
 	}
       });
+    $('#modal-preview').on('shown', function() {
+	// TODO: Determine best fit (min(height, width)?)
+	// TODO: Animate dimension change
+	var width = $('.modal-body', this).width();
+	$('.modal-body', this).height(width / 2);
+      });
     $('#modal-preview').on('hidden', function() {
 	$(this).removeData('modal');
 	$('.modal-body', this).empty();
