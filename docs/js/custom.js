@@ -28,6 +28,11 @@ $(document).ready(function() {
 					'sms:',
 					'mms:']});
 
+    // Form preview handler.
+    $('#form-preview').click(function() {
+	$('#modal-preview').modal();
+      });
+
     // Form submit handler.
     $('#form').submit(function() {
 	if ($('#form-text').val().length == 0) {

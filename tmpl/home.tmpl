@@ -3,6 +3,18 @@
 				<button type="button" id="alert-no-text-close" class="close">&times;</button>
 				<strong>Error!</strong> Please specify some text first
 			</div>
+			<div id="modal-preview" class="modal hide fade" tabindex="-1">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h3>Preview</h3>
+				</div>
+				<div class="modal-body">
+					<p></p>
+				</div>
+				<div class="modal-footer">
+					<a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
+				</div>
+			</div>
 			<form id="form" class="form-horizontal" action="/qrcode.pl" method="get">
 				<div class="control-group">
 					<label class="control-label" for="form-text">Text</label>
@@ -82,7 +94,7 @@
 				<div class="control-group">
 					<div class="controls">
 						<button type="submit" class="btn btn-primary"><i class="icon-download icon-white"></i> Download</button>
-						<button type="button" class="btn"><i class="icon-search"></i> Preview</button>
+						<button type="button" id="form-preview" class="btn"><i class="icon-search"></i> Preview</button>
 						<button type="reset" class="btn"><i class="icon-remove"></i> Reset</button>
 					</div>
 				</div>
