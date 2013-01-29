@@ -33,6 +33,7 @@ $(document).ready(function() {
       });
     $('#modal-preview').on('hidden', function() {
 	$(this).removeData('modal');
+	$('.modal-body', this).empty();
       });
 
     // Form submit handler.
