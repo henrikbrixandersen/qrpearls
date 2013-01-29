@@ -30,17 +30,14 @@ $(document).ready(function() {
 
     // Form preview handler.
     $('#form-preview').click(function() {
-	$('#modal-preview').modal({remote: '/img/test.svg'});
+	if (validateFormInput()) {
+	  $('#modal-preview').modal({remote: '/img/test.svg'});
+	}
       });
 
     // Form submit handler.
     $('#form').submit(function() {
-	if ($('#form-text').val().length == 0) {
-	  $('#alert-no-text').fadeIn();
-	  return false;
-	}
-
-	return true;
+	return validateFormInput();
       });
 
     // Autofocus input field on non-touch devices.
@@ -49,6 +46,18 @@ $(document).ready(function() {
     }
   });
 
+/**
+ * Function to validate form input.
+ */
+function validateFormInput() {
+  if ($('#form-text').val().length == 0) {
+    $('#alert-no-text').fadeIn();
+    return false;
+  } else {
+    $('#alert-no-text').fadeOut();
+    return true;
+  }
+}
 
 /**
  * Function to test whether a given mouse event is supported.
