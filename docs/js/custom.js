@@ -7,7 +7,7 @@ $(document).ready(function() {
 
     // Language selection handler.
     $('.lang-select').click(function() {
-	document.cookie='lang=' + $(this).data('lang');
+	document.cookie='lang=' + $(this).data('lang') + '; Path=/';
 	location.reload();
 	return false;
       });
