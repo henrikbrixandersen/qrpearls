@@ -1,7 +1,7 @@
 /**
  * This is where it all begins.
  */
-$(document).ready(function() {
+jQuery(function($) {
     // Hide address bar on iOS devices.
     setTimeout('window.scrollTo(0, 0);', 0);
 
