@@ -28,7 +28,7 @@ $(document).ready(function() {
     // Form preview handler.
     $('#form-preview').click(function() {
 	if (validateFormInput()) {
-	  $('#modal-preview').modal({remote: '/qrcode.pl?' + $('#form').serialize()});
+	  $('#modal-preview').modal({remote: '/qrcode.pl?preview=1&' + $('#form').serialize()});
 	}
       });
     $('#modal-preview').on('hidden', function() {
