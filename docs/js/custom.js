@@ -30,7 +30,7 @@ $(document).ready(function() {
 
     // Form preview handler.
     $('#form-preview').click(function() {
-	$('#modal-preview').modal();
+	$('#modal-preview').modal({remote: '/img/test.svg'});
       });
 
     // Form submit handler.
