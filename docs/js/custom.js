@@ -28,7 +28,7 @@ $(document).ready(function() {
     // Form preview handler.
     $('#form-preview').click(function() {
 	if (validateFormInput()) {
-	  $('#modal-preview').modal({remote: '/img/test.svg'});
+	  $('#modal-preview').modal({remote: '/qrcode.pl?' + $('#form').serialize()});
 	}
       });
 
