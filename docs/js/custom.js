@@ -1,5 +1,10 @@
 $(document).ready(function() {
     /**
+     * Hide address bar on iOS devices.
+     */
+    setTimeout('window.scrollTo(0, 0);', 0);
+
+    /**
      * Language selection handler.
      */
     $('.lang-select').click(function() {
