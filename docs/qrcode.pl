@@ -89,7 +89,7 @@ if ($preview) {
 
     print $q->header(-expires => '0',
                      -type => 'image/svg+xml');
-    print $svg->xmlify;
+    print $svg->xmlify(-inline => 1);;
 } else {
     # Generate PDF
     my $pdf = PDF::API2->new();
