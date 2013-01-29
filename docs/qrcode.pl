@@ -14,9 +14,6 @@ my $level = 'L';
 my $version = 0;
 my $text = 'http://qr.brixandersen.dk';
 
-# SVG defaults
-my $svgscale = 10;
-
 # Initialize CGI and catch errors
 my $q = CGI->new;
 $q->charset('UTF-8');
@@ -60,18 +57,18 @@ if ($preview) {
     my $height = $img->getheight;
     # TODO: Calculate scale
 
-    my $svg = SVG->new('width' => $width * $svgscale, 'height' => $height * $svgscale);
+    my $svg = SVG->new(viewBox => "0 0 $width $height");
     my $d;
 
     for (my $y = 0; $y < $height; $y++) {
-        my $ys = ($y + 0.5) * $svgscale;
+        my $ys = $y + 0.5;
         $d .= "M 0 $ys ";
 
         for (my $x = 0; $x < $width; $x++) {
-            my $xs = ($x + 1) * $svgscale;
-            my $color = $img->getpixel('x' => $x, 'y' => $y);
+            my $xs = $x + 1;
+            my $color = $img->getpixel(x => $x, y => $y);
 
-            if ($color->equals('other' => $black)) {
+            if ($color->equals(other => $black)) {
                 $d .= "H $xs ";
             } else {
                 $d .= "M $xs $ys ";
@@ -79,11 +76,11 @@ if ($preview) {
         }
     }
 
-    $svg->path('d' => $d,
-               'style' => {
-                   'fill' => 'none',
-                   'stroke' => 'rgb(0,0,0)',
-                   'stroke-width' => $svgscale,
+    $svg->path(d => $d,
+               style => {
+                   fill => 'none',
+                   stroke => 'rgb(0,0,0)',
+                   'stroke-width' => 1,
                    'stroke-linecap' => 'butt',
                });
 
