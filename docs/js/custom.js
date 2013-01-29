@@ -2,9 +2,6 @@
  * This is where it all begins.
  */
 $(document).ready(function() {
-    // Browser touch event support
-    var touchSupported = isMouseEventSupported('touchmove');
-
     // Hide address bar on iOS devices.
     setTimeout('window.scrollTo(0, 0);', 0);
 
@@ -40,11 +37,19 @@ $(document).ready(function() {
 	return validateFormInput();
       });
 
-    // Autofocus input field on non-touch devices.
+    // Auto-focus input field on non-touch devices.
+    focusTouchInput();
+  });
+
+/**
+ * Function to conditionally focus text input field.
+ */
+function focusTextInput() {
+    var touchSupported = isMouseEventSupported('touchmove');
     if (!touchSupported) {
       $('#form-text').focus();
     }
-  });
+}
 
 /**
  * Function to validate form input.
@@ -52,6 +57,7 @@ $(document).ready(function() {
 function validateFormInput() {
   if ($('#form-text').val().length == 0) {
     $('#alert-no-text').fadeIn();
+    focusTextInput();
     return false;
   } else {
     $('#alert-no-text').fadeOut();
