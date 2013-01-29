@@ -5,15 +5,15 @@
 			</div>
 			<form id="form" class="form-horizontal" action="/qrcode.pl" method="get">
 				<div class="control-group">
-					<label class="control-label" for="inputText">Text</label>
+					<label class="control-label" for="form-text">Text</label>
 					<div class="controls">
-						<input class="input-xlarge" type="text" id="inputText" name="text" placeholder="QR Code Text" autofocus>
+						<input class="input-xlarge" type="text" id="form-text" name="text" placeholder="QR Code Text" autofocus>
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="inputVersion">Version</label>
+					<label class="control-label" for="form-version">Version</label>
 					<div class="controls">
-						<select id="inputVersion" name="version">
+						<select id="form-version" name="version">
 							<option value="0" selected>Automatic</option>
               <option value="1">1 (21x21)</option>
               <option value="2">2 (25x25)</option>
@@ -59,22 +59,22 @@
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="inputLevelL">Error Correction</label>
+					<label class="control-label" for="form-level-l">Error Correction</label>
 					<div class="controls">
 						<label class="radio inline">
-							<input type="radio" id="inputLevelL" name="level" value="L" checked>
+							<input type="radio" id="form-level-l" name="level" value="L" checked>
 							Low
 						</label>
 						<label class="radio inline">
-							<input type="radio" id="inputLevelM" name="level" value="M">
+							<input type="radio" id="form-level-m" name="level" value="M">
 							Medium
 						</label>
 						<label class="radio inline">
-							<input type="radio" id="inputLevelQ" name="level" value="Q">
+							<input type="radio" id="form-level-q" name="level" value="Q">
 							Quartile
 						</label>
 						<label class="radio inline">
-							<input type="radio" id="inputLevelH" name="level" value="H">
+							<input type="radio" id="form-level-h" name="level" value="H">
 							High
 						</label>
 					</div>
