@@ -38,7 +38,7 @@ $(document).ready(function() {
       });
 
     // Auto-focus input field on non-touch devices.
-    focusTouchInput();
+    focusTextInput();
   });
 
 /**
