@@ -41,13 +41,13 @@ if (utf8::valid($q->param('text'))) {
 my $black = Imager::Color->new(0, 0, 0);
 my $white = Imager::Color->new(255, 255, 255);
 my $qrcode = Imager::QRCode->new(
-	'size'			=> 1,
-	'margin'		=> 1,
-	'version'		=> $version,
-	'level'			=> $level,
-	'casesensitive'	=> 1,
-	'lightcolor'	=> $white,
-	'darkcolor'		=> $black,
+	size			=> 1,
+	margin			=> 1,
+	version			=> $version,
+	level			=> $level,
+	casesensitive	=> 1,
+	lightcolor		=> $white,
+	darkcolor		=> $black,
     );
 my $img = $qrcode->plot($text);
 
@@ -55,8 +55,6 @@ if ($preview) {
     # Generate preview SVG
     my $width = $img->getwidth;
     my $height = $img->getheight;
-    # TODO: Calculate scale
-
     my $svg = SVG->new(viewBox => "0 0 $width $height");
     my $d;
 
