@@ -8,6 +8,10 @@ use Imager::QRCode;
 use SVG qw/-nocredits => 1/;
 use PDF::API2;
 
+use constant mm => 25.4/72;
+use constant in => 1/72;
+use constant pt => 1;
+
 # QR code defaults
 my $preview = 0;
 my $level = 'L';
@@ -16,7 +20,6 @@ my $text = 'http://qr.brixandersen.dk';
 
 # Initialize CGI and catch errors
 my $q = CGI->new;
-$q->charset('UTF-8');
 my $error = $q->cgi_error;
 if ($error) {
     print $q->header(-status => $error);
@@ -88,12 +91,99 @@ if ($preview) {
 } else {
     # Generate PDF
     my $pdf = PDF::API2->new();
-    my $page = $pdf->page;
+    # TODO: CreationDate
+    $pdf->info(Author		=> 'Henrik Brix Andersen',
+               Title		=> 'QR Pearls',
+               Subject		=> 'QR Code Beads Design',
+               Creator		=> 'http://qr.brixandersen.dk');
 
-    # TODO: Fill in PDF
+    # Fonts
+    my $encoding = 'iso-8859-1';
+    my %fonts = (
+        helvetica => {
+            regular	=> $pdf->corefont('Helvetica', -encode => $encoding),
+            bold	=> $pdf->corefont('Helvetica-Bold', -encode => $encoding),
+            italic	=> $pdf->corefont('Helvetica-Oblique', -encode => $encoding),
+        },
+        times => {
+            regular	=> $pdf->corefont('Times', -encode => $encoding),
+            bold	=> $pdf->corefont('Times-Bold', -encode => $encoding),
+            italic	=> $pdf->corefont('Times-Italic', -encode => $encoding),
+        }
+        );
+
+    # Title page
+    my $page = $pdf->page;
+    $page->mediabox('A4');
+
+    # TODO: Fill in pages
+    my $gfx = $page->gfx;
+
+    $gfx->pegboard(33/mm, 60/mm, 144/mm);
+    $gfx->linewidth(1/pt);
+    $gfx->linejoin(1);
+    $gfx->strokecolor('#aaaaaa');
+    $gfx->stroke;
 
     print $q->header(-expires => '0',
                      -type => 'application/pdf',
-                     -attachment => 'QR Code.pdf');
+                     -attachment => 'QR Pearls.pdf');
     print $pdf->stringify;
+    $pdf->end;
+}
+
+sub PDF::API2::Content::pegboard {
+    my ($gfx, $x, $y, $size) = @_;
+    my $r = $size / 72;
+    my $hinge_w  = $size / 36;    # Hinge width
+    my $hinge_ih = $size / 12;    # Hinge inner height
+    my $hinge_oh = $size / 72;    # Hinge outer height
+    my $hinge_d  = $size / 4.965; # Hinge distance from edge
+
+    $gfx->save;
+    $gfx->translate($x, $y);
+    $gfx->move(0, 0);
+
+    # TODO: Use translate + rotate instead of this mess
+
+    # Top left corner
+    $gfx->arc($r, $size - $r, $r, $r, 180, 90, 1);
+
+    # Top right corner
+    $gfx->arc($size - $r, $size - $r, $r, $r, 90, 0, 0);
+
+    # Right topmost hinge
+    $gfx->line($size, $size - $hinge_d);
+    $gfx->line($size + $hinge_w, $size - $hinge_d + $hinge_oh);
+    $gfx->line($size + $hinge_w, $size - $hinge_d - $hinge_ih - $hinge_oh);
+    $gfx->line($size, $size - $hinge_d - $hinge_ih);
+
+    # Right bottommost hinge
+    $gfx->line($size, $hinge_d + $hinge_ih);
+    $gfx->line($size + $hinge_w, $hinge_d + $hinge_ih + $hinge_oh);
+    $gfx->line($size + $hinge_w, $hinge_d - $hinge_oh);
+    $gfx->line($size, $hinge_d);
+
+    # Bottom right corner
+    $gfx->arc($size - $r, $r, $r, $r, 360, 270, 0);
+
+    # Bottom rightmost hinge
+    $gfx->line($size - $hinge_d, 0);
+    $gfx->line($size - $hinge_d + $hinge_oh, -$hinge_w);
+    $gfx->line($size - $hinge_d - $hinge_ih - $hinge_oh, -$hinge_w);
+    $gfx->line($size - $hinge_d - $hinge_ih, 0);
+
+    # Right bottommost hinge
+    $gfx->line($hinge_d + $hinge_ih, 0);
+    $gfx->line($hinge_d + $hinge_ih + $hinge_oh, -$hinge_w);
+    $gfx->line($hinge_d - $hinge_oh, -$hinge_w);
+    $gfx->line($hinge_d, 0);
+
+    # Bottom left corner
+    $gfx->arc($r, $r, $r, $r, 270, 180, 0);
+
+    $gfx->close;
+    $gfx->restore;
+
+    return $gfx;
 }
