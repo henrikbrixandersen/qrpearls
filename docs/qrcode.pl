@@ -12,6 +12,8 @@ use constant mm => 25.4/72;
 use constant in => 1/72;
 use constant pt => 1;
 
+use constant pegs => 29;
+
 # QR code defaults
 my $preview = 0;
 my $level = 'L';
@@ -53,19 +55,19 @@ my $qrcode = Imager::QRCode->new(
 	darkcolor		=> $black,
     );
 my $img = $qrcode->plot($text);
+my $size = $img->getwidth;
+$size == $img->getheight or die "Generated QR code is not square";
 
 if ($preview) {
     # Generate preview SVG
-    my $width = $img->getwidth;
-    my $height = $img->getheight;
-    my $svg = SVG->new(viewBox => "0 0 $width $height");
+    my $svg = SVG->new(viewBox => "0 0 $size $size");
     my $d;
 
-    for (my $y = 0; $y < $height; $y++) {
+    for (my $y = 0; $y < $size; $y++) {
         my $ys = $y + 0.5;
         $d .= "M 0 $ys ";
 
-        for (my $x = 0; $x < $width; $x++) {
+        for (my $x = 0; $x < $size; $x++) {
             my $xs = $x + 1;
             my $color = $img->getpixel(x => $x, y => $y);
 
@@ -90,6 +92,17 @@ if ($preview) {
     print $svg->xmlify(-inline => 1);;
 } else {
     # Generate PDF
+    my @qrcode;
+    for (my $x = 0; $x < $size; $x++) {
+        my @col;
+        for (my $y = $size - 1; $y >= 0; $y--) {
+            # Beware: Translation from IV quadrant to I quadrant
+            my $color = $img->getpixel(x => $x, y => $y);
+            push @col, $color->equals(other => $black) ? 0 : 1;
+        }
+        push @qrcode, \@col;
+    }
+
     my $pdf = PDF::API2->new();
     # TODO: CreationDate
     $pdf->info(Author		=> 'Henrik Brix Andersen',
@@ -119,7 +132,11 @@ if ($preview) {
     # TODO: Fill in pages
     my $gfx = $page->gfx;
 
-    $gfx->pegboard(33/mm, 60/mm, 144/mm);
+    # QR code
+    $gfx->qrcode(33/mm, 200/mm, 30/mm, @qrcode);
+
+    # Main pegboard
+    $gfx->pegboard(33/mm, 40/mm, 144/mm);
     $gfx->linewidth(1/pt);
     $gfx->linejoin(1);
     $gfx->strokecolor('#aaaaaa');
@@ -129,7 +146,36 @@ if ($preview) {
                      -type => 'application/pdf',
                      -attachment => 'QR Pearls.pdf');
     print $pdf->stringify;
+
     $pdf->end;
+}
+
+sub PDF::API2::Content::qrcode {
+    my ($gfx, $x, $y, $size, @qrcode) = @_;
+    my $scale = $size / @qrcode;
+
+    $gfx->save;
+    $gfx->translate($x, $y);
+    $gfx->scale($scale, $scale);
+    $gfx->linewidth(0.01/pt);
+
+    for (my $xp = 0; $xp < @qrcode; $xp++) {
+        for (my $yp = 0; $yp < @qrcode; $yp++) {
+            $gfx->rect($xp/pt, $yp/pt, 1/pt, 1/pt);
+            if ($qrcode[$xp][$yp]) {
+                $gfx->fillcolor('#FFFFFF');
+                $gfx->strokecolor('#FFFFFF');
+            } else {
+                $gfx->fillcolor('#000000');
+                $gfx->strokecolor('#000000');
+            }
+            $gfx->fillstroke;
+        }
+    }
+
+    $gfx->restore;
+
+    return $gfx;
 }
 
 sub PDF::API2::Content::pegboard {
