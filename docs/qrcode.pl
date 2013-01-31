@@ -98,7 +98,7 @@ if ($preview) {
         for (my $y = $size - 1; $y >= 0; $y--) {
             # Beware: Translation from IV quadrant to I quadrant
             my $color = $img->getpixel(x => $x, y => $y);
-            push @col, $color->equals(other => $black) ? 0 : 1;
+            push @col, $color->equals(other => $black) ? 1 : 0;
         }
         push @qrcode, \@col;
     }
@@ -219,15 +219,12 @@ sub PDF::API2::Content::qrcode {
 
     for (my $xp = 0; $xp < @qrcode; $xp++) {
         for (my $yp = 0; $yp < @qrcode; $yp++) {
-            $gfx->rect($xp/pt, $yp/pt, 1/pt, 1/pt);
             if ($qrcode[$xp][$yp]) {
-                $gfx->fillcolor('#FFFFFF');
-                $gfx->strokecolor('#FFFFFF');
-            } else {
+                $gfx->rect($xp/pt, $yp/pt, 1/pt, 1/pt);
                 $gfx->fillcolor('#000000');
                 $gfx->strokecolor('#000000');
+                $gfx->fillstroke;
             }
-            $gfx->fillstroke;
         }
     }
 
