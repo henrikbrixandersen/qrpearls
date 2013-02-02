@@ -148,8 +148,6 @@ if ($preview) {
 
     # TODO: Add required materials (peg boards, beads)
 
-    # TODO: Add footer
-
     # Fill in pages
     for (my $x = 0; $x < $size; $x += pegs) {
         for (my $y = $size - 1; $y >= 0; $y -= pegs) {
