@@ -248,46 +248,43 @@ sub PDF::API2::Content::pegboard {
     my $hinge_d  = $size / 4.965; # Hinge distance from edge
 
     $gfx->save;
-    $gfx->translate($x, $y);
-    $gfx->move(0, 0);
-
-    # TODO: Use translate + rotate instead of this mess
+    $gfx->move($x, $y);
 
     # Top left corner
-    $gfx->arc($r, $size - $r, $r, $r, 180, 90, 1);
+    $gfx->arc($x + $r, $y + $size - $r, $r, $r, 180, 90, 1);
 
     # Top right corner
-    $gfx->arc($size - $r, $size - $r, $r, $r, 90, 0, 0);
+    $gfx->arc($x + $size - $r, $y + $size - $r, $r, $r, 90, 0, 0);
 
     # Right topmost hinge
-    $gfx->line($size, $size - $hinge_d);
-    $gfx->line($size + $hinge_w, $size - $hinge_d + $hinge_oh);
-    $gfx->line($size + $hinge_w, $size - $hinge_d - $hinge_ih - $hinge_oh);
-    $gfx->line($size, $size - $hinge_d - $hinge_ih);
+    $gfx->line($x + $size, $y + $size - $hinge_d);
+    $gfx->line($x + $size + $hinge_w, $y + $size - $hinge_d + $hinge_oh);
+    $gfx->line($x + $size + $hinge_w, $y + $size - $hinge_d - $hinge_ih - $hinge_oh);
+    $gfx->line($x + $size, $y + $size - $hinge_d - $hinge_ih);
 
     # Right bottommost hinge
-    $gfx->line($size, $hinge_d + $hinge_ih);
-    $gfx->line($size + $hinge_w, $hinge_d + $hinge_ih + $hinge_oh);
-    $gfx->line($size + $hinge_w, $hinge_d - $hinge_oh);
-    $gfx->line($size, $hinge_d);
+    $gfx->line($x + $size, $y + $hinge_d + $hinge_ih);
+    $gfx->line($x + $size + $hinge_w, $y + $hinge_d + $hinge_ih + $hinge_oh);
+    $gfx->line($x + $size + $hinge_w, $y + $hinge_d - $hinge_oh);
+    $gfx->line($x + $size, $y + $hinge_d);
 
     # Bottom right corner
-    $gfx->arc($size - $r, $r, $r, $r, 360, 270, 0);
+    $gfx->arc($x + $size - $r, $y + $r, $r, $r, 360, 270, 0);
 
     # Bottom rightmost hinge
-    $gfx->line($size - $hinge_d, 0);
-    $gfx->line($size - $hinge_d + $hinge_oh, -$hinge_w);
-    $gfx->line($size - $hinge_d - $hinge_ih - $hinge_oh, -$hinge_w);
-    $gfx->line($size - $hinge_d - $hinge_ih, 0);
+    $gfx->line($x + $size - $hinge_d, $y);
+    $gfx->line($x + $size - $hinge_d + $hinge_oh, $y - $hinge_w);
+    $gfx->line($x + $size - $hinge_d - $hinge_ih - $hinge_oh, $y -$hinge_w);
+    $gfx->line($x + $size - $hinge_d - $hinge_ih, $y);
 
     # Right bottommost hinge
-    $gfx->line($hinge_d + $hinge_ih, 0);
-    $gfx->line($hinge_d + $hinge_ih + $hinge_oh, -$hinge_w);
-    $gfx->line($hinge_d - $hinge_oh, -$hinge_w);
-    $gfx->line($hinge_d, 0);
+    $gfx->line($x + $hinge_d + $hinge_ih, $y);
+    $gfx->line($x + $hinge_d + $hinge_ih + $hinge_oh, $y - $hinge_w);
+    $gfx->line($x + $hinge_d - $hinge_oh, $y - $hinge_w);
+    $gfx->line($x + $hinge_d, $y);
 
     # Bottom left corner
-    $gfx->arc($r, $r, $r, $r, 270, 180, 0);
+    $gfx->arc($x + $r, $y + $r, $r, $r, 270, 180, 0);
 
     $gfx->close;
     $gfx->restore;
