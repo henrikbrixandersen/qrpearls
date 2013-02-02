@@ -2,7 +2,6 @@
 
 use strict;
 
-use POSIX qw/ceil/;
 use CGI qw/-utf8/;
 use Locale::TextDomain;
 use Imager::QRCode;
