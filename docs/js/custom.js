@@ -28,14 +28,14 @@ jQuery(function($) {
     // Form preview handler.
     $('#form-preview').click(function() {
 	if (validateFormInput()) {
+	  $('#modal-preview > .modal-body').height(0);
 	  $('#modal-preview').modal({remote: '/qrcode.pl?preview=1&' + $('#form').serialize()});
 	}
       });
     $('#modal-preview').on('shown', function() {
 	// TODO: Determine best fit (min(height, width)?)
-	// TODO: Animate dimension change
-	var width = $('.modal-body', this).width();
-	$('.modal-body', this).height(width / 2);
+	var height = $('.modal-body', this).width() / 2;
+	$('.modal-body', this).animate({height: height});
       });
     $('#modal-preview').on('hidden', function() {
 	$(this).removeData('modal');
