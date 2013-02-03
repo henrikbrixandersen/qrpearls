@@ -184,19 +184,29 @@ if ($preview) {
             # Peg boards overview
             if ($boards > 1) {
                 my $overview = 60/mm / $boards;
+                my $posx = 120/mm;
+                my $posy = 260/mm;
+                my $boardno = 1;
                 $gfx->linewidth(1/pt);
                 $gfx->linejoin(1);
                 $gfx->strokecolor('#aaaaaa');
                 $gfx->fillcolor('#555555');
                 for (my $overviewy = 0; $overviewy < $boards; $overviewy++) {
                     for (my $overviewx = 0; $overviewx < $boards; $overviewx++) {
-                        $gfx->pegboard(120/mm + ($overviewx * $overview), 260/mm - $overview - ($overviewy * $overview), $overview);
+                        $gfx->pegboard($posx + $overviewx * $overview, $posy - $overview - $overviewy * $overview, $overview);
                         if ($overviewx == $boardx && $overviewy == $boardy) {
                             $gfx->fillstroke;
+                            $text->fillcolor('#ffffff');
+                            $text->render(0);
                         } else {
                             $gfx->stroke;
+                            $text->fillcolor('#aaaaaa');
+                            $text->render(1);
                         }
-                        # TODO: Add peg board overview labels
+                        # Peg boards overview labels
+                        $text->translate($posx + $overviewx * $overview + $overview / 2, $posy - $overview - $overviewy * $overview + $overview / 4);
+                        $text->font($fonts{'helvetica'}{'bold'}, $overview * 0.75);
+                        $text->text_center($boardno++);
                     }
                 }
             }
