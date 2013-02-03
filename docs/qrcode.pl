@@ -294,13 +294,13 @@ sub PDF::API2::Content::pegboard {
     # Right topmost hinge
     $gfx->line($x + $size, $y + $size - $hinge_d);
     $gfx->line($x + $size + $hinge_w, $y + $size - $hinge_d + $hinge_oh);
-    $gfx->line($x + $size + $hinge_w, $y + $size - $hinge_d - $hinge_ih - $hinge_oh);
+    $gfx->vline($y + $size - $hinge_d - $hinge_ih - $hinge_oh);
     $gfx->line($x + $size, $y + $size - $hinge_d - $hinge_ih);
 
     # Right bottommost hinge
     $gfx->line($x + $size, $y + $hinge_d + $hinge_ih);
     $gfx->line($x + $size + $hinge_w, $y + $hinge_d + $hinge_ih + $hinge_oh);
-    $gfx->line($x + $size + $hinge_w, $y + $hinge_d - $hinge_oh);
+    $gfx->vline($y + $hinge_d - $hinge_oh);
     $gfx->line($x + $size, $y + $hinge_d);
 
     # Bottom right corner
@@ -309,13 +309,13 @@ sub PDF::API2::Content::pegboard {
     # Bottom rightmost hinge
     $gfx->line($x + $size - $hinge_d, $y);
     $gfx->line($x + $size - $hinge_d + $hinge_oh, $y - $hinge_w);
-    $gfx->line($x + $size - $hinge_d - $hinge_ih - $hinge_oh, $y -$hinge_w);
+    $gfx->hline($x + $size - $hinge_d - $hinge_ih - $hinge_oh);
     $gfx->line($x + $size - $hinge_d - $hinge_ih, $y);
 
     # Right bottommost hinge
     $gfx->line($x + $hinge_d + $hinge_ih, $y);
     $gfx->line($x + $hinge_d + $hinge_ih + $hinge_oh, $y - $hinge_w);
-    $gfx->line($x + $hinge_d - $hinge_oh, $y - $hinge_w);
+    $gfx->hline($x + $hinge_d - $hinge_oh);
     $gfx->line($x + $hinge_d, $y);
 
     # Bottom left corner
