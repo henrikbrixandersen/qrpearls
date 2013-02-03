@@ -258,19 +258,17 @@ sub PDF::API2::Content::qrcode {
     $gfx->save;
     $gfx->translate($x, $y);
     $gfx->scale($scale, $scale);
-    $gfx->linewidth(0.01/pt);
+    $gfx->fillcolor('#000000');
 
     for (my $xp = 0; $xp < @qrcode; $xp++) {
         for (my $yp = 0; $yp < @qrcode; $yp++) {
             if ($qrcode[$xp][$yp]) {
                 $gfx->rect($xp/pt, $yp/pt, 1/pt, 1/pt);
-                $gfx->fillcolor('#000000');
-                $gfx->strokecolor('#000000');
-                $gfx->fillstroke;
             }
         }
     }
 
+    $gfx->fill;
     $gfx->restore;
 
     return $gfx;
