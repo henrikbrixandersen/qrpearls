@@ -2,6 +2,7 @@
 
 use strict;
 
+use POSIX qw/ceil/;
 use CGI qw/-utf8/;
 use Locale::TextDomain;
 use Imager::QRCode;
@@ -137,20 +138,30 @@ if ($preview) {
 
     $text->translate(105/mm, 255/mm);
     $text->font($fonts{'helvetica'}{'bold'}, 72/pt);
-    $gfx->fillcolor('#ffffff');
+    $text->fillcolor('#ffffff');
     $text->text_center('QR Pearls');
 
     # TODO: Add instructions
 
     $gfx->qrcode(80/mm, 170/mm, 50/mm, @qrcode);
 
-    # TODO: Add parameters
+    # TODO: Improve parameters listing
+    $text->font($fonts{'helvetica'}{'regular'}, 20/pt);
+    $text->fillcolor('#000000');
+    $text->translate(105/mm, 120/mm);
+    $text->text_center("Text: $content");
+    $text->cr(-25/pt);
+    my $realversion = ($size - 23) / 4 + 1;
+    $text->text_center("Version: $realversion (${size}x${size})" . ($version == 0 ? ' (Automatic)' : ''));
+    $text->cr(-25/pt);
+    $text->text_center("Error Correction: $level");
 
-    # TODO: Add required materials (peg boards, beads)
+    # TODO: Add total required materials (peg boards, beads)
 
-    # Fill in pages
-    for (my $x = 0; $x < $size; $x += pegs) {
-        for (my $y = $size - 1; $y >= 0; $y -= pegs) {
+    # Fill in peg board pages
+    my $boards = ceil(@qrcode / pegs);
+    for (my $boardy = 0; $boardy < $boards; $boardy++) {
+        for (my $boardx = 0; $boardx < $boards; $boardx++) {
             $page = $pdf->page;
             $gfx = $page->gfx;
             $text = $page->text;
@@ -168,9 +179,27 @@ if ($preview) {
             $gfx->strokecolor('#aaaaaa');
             $gfx->stroke;
 
-            # TODO: Add peg board overview
-
             # TODO: Add required materials
+
+            # Peg boards overview
+            if ($boards > 1) {
+                my $overview = 60/mm / $boards;
+                $gfx->linewidth(1/pt);
+                $gfx->linejoin(1);
+                $gfx->strokecolor('#aaaaaa');
+                $gfx->fillcolor('#555555');
+                for (my $overviewy = 0; $overviewy < $boards; $overviewy++) {
+                    for (my $overviewx = 0; $overviewx < $boards; $overviewx++) {
+                        $gfx->pegboard(120/mm + ($overviewx * $overview), 260/mm - $overview - ($overviewy * $overview), $overview);
+                        if ($overviewx == $boardx && $overviewy == $boardy) {
+                            $gfx->fillstroke;
+                        } else {
+                            $gfx->stroke;
+                        }
+                        # TODO: Add peg board overview labels
+                    }
+                }
+            }
 
             # Main pegboard
             # TODO: Add 5, 10, 15, ... lines + numbers
