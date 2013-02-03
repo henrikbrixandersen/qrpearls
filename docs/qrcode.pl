@@ -209,6 +209,7 @@ if ($preview) {
                         $text->text_center($boardno++);
                     }
                 }
+                $text->render(0);
             }
 
             # Main pegboard
