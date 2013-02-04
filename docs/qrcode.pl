@@ -2,7 +2,7 @@
 
 use strict;
 
-use POSIX qw/ceil/;
+use POSIX qw/ceil strftime/;
 use CGI qw/-utf8/;
 use Locale::TextDomain;
 use Imager::QRCode;
@@ -105,11 +105,13 @@ if ($preview) {
     }
 
     my $pdf = PDF::API2->new();
-    # TODO: CreationDate
+    my $date = strftime("D:%Y%m%d%H%M%S%z'", localtime);
+    substr($date, -3, 0, "'");
     $pdf->info(Author		=> 'Henrik Brix Andersen',
                Title		=> 'QR Pearls',
                Subject		=> 'QR Code Beads Design',
-               Creator		=> 'http://qr.brixandersen.dk');
+               Creator		=> 'http://qr.brixandersen.dk',
+               CreationDate	=> $date);
 
     # Fonts
     my $encoding = 'iso-8859-1';
