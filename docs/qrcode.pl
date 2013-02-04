@@ -110,7 +110,7 @@ if ($preview) {
     $pdf->info(Author		=> 'Henrik Brix Andersen',
                Title		=> 'QR Pearls',
                Subject		=> 'QR Code Beads Design',
-               Creator		=> 'http://qr.brixandersen.dk',
+               Producer		=> 'http://qr.brixandersen.dk',
                CreationDate	=> $date);
 
     # Fonts
