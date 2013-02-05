@@ -46,7 +46,7 @@ if (utf8::valid($q->param('text'))) {
 # Generate QR Code
 my $black = Imager::Color->new(0, 0, 0);
 my $white = Imager::Color->new(255, 255, 255);
-my $qrcode = Imager::QRCode->new(
+my $imager = Imager::QRCode->new(
 	size			=> 1,
 	margin			=> 1,
 	version			=> $version,
@@ -55,9 +55,9 @@ my $qrcode = Imager::QRCode->new(
 	lightcolor		=> $white,
 	darkcolor		=> $black,
     );
-my $img = $qrcode->plot($content);
-my $size = $img->getwidth;
-$size == $img->getheight or die "Generated QR code is not square";
+my $qrcode = $imager->plot($content);
+my $size = $qrcode->getwidth;
+$size == $qrcode->getheight or die "Generated QR code is not square";
 
 if ($preview) {
     # Generate preview SVG
@@ -70,7 +70,7 @@ if ($preview) {
 
         for (my $x = 0; $x < $size; $x++) {
             my $xs = $x + 1;
-            my $color = $img->getpixel(x => $x, y => $y);
+            my $color = $qrcode->getpixel(x => $x, y => $y);
 
             if ($color->equals(other => $black)) {
                 $d .= "H $xs ";
@@ -93,16 +93,6 @@ if ($preview) {
     print $svg->xmlify(-inline => 1);;
 } else {
     # Generate PDF
-    my @qrcode;
-    for (my $x = 0; $x < $size; $x++) {
-        my @col;
-        for (my $y = 0; $y < $size; $y++) {
-            my $color = $img->getpixel(x => $x, y => $y);
-            push @col, $color->equals(other => $black) ? 1 : 0;
-        }
-        push @qrcode, \@col;
-    }
-
     my $pdf = PDF::API2->new();
     my $date = strftime("D:%Y%m%d%H%M%S%z'", localtime);
     substr($date, -3, 0, "'");
@@ -144,7 +134,7 @@ if ($preview) {
 
     # TODO: Add instructions
 
-    $gfx->qrcode(80/mm, 170/mm, 50/mm, @qrcode);
+    $gfx->qrcode(80/mm, 170/mm, 50/mm, $qrcode);
 
     # TODO: Improve parameters listing
     $text->font($fonts{'helvetica'}{'regular'}, 20/pt);
@@ -160,7 +150,7 @@ if ($preview) {
     # TODO: Add total required materials (peg boards, beads)
 
     # Fill in peg board pages
-    my $boards = ceil(@qrcode / pegs);
+    my $boards = ceil($size / pegs);
     for (my $boardy = 0; $boardy < $boards; $boardy++) {
         for (my $boardx = 0; $boardx < $boards; $boardx++) {
             $page = $pdf->page;
@@ -232,11 +222,11 @@ if ($preview) {
                     my $x = $beadx * $dia + $dia / 2;
                     my $y = - $beady * $dia - $dia / 2;
                     # TODO: Flip QR code in x
-                    my $bead = $qrcode[$boardx * pegs + $beadx][$boardy * pegs + $beady];
+                    my $color = $qrcode->getpixel(x => $boardx * pegs + $beadx, y => $boardy * pegs + $beady);
                     $gfx->circle($x, $y, $dia / 6);
-                    if (defined($bead)) {
+                    if (defined($color)) {
                         $gfx->circle($x, $y, $dia / 2 - 0.5/pt);
-                        if ($bead) {
+                        if ($color->equals(other => $black)) {
                             $gfx->fillstroke(1);
                         } else {
                             $gfx->stroke;
@@ -283,17 +273,19 @@ if ($preview) {
 }
 
 sub PDF::API2::Content::qrcode {
-    my ($gfx, $x, $y, $size, @qrcode) = @_;
-    my $scale = $size / @qrcode;
+    my ($gfx, $x, $y, $size, $qrcode) = @_;
+    my $pixels = $qrcode->getheight;
+    my $scale = $size / $pixels;
 
     $gfx->save;
     $gfx->translate($x, $y + $size);
     $gfx->scale($scale, $scale);
     $gfx->fillcolor('#000000');
 
-    for (my $xp = 0; $xp < @qrcode; $xp++) {
-        for (my $yp = 0; $yp < @qrcode; $yp++) {
-            if ($qrcode[$xp][$yp]) {
+    for (my $xp = 0; $xp < $pixels; $xp++) {
+        for (my $yp = 0; $yp < $pixels; $yp++) {
+            my $color = $qrcode->getpixel(x => $xp, y => $yp);
+            if ($color->equals(other => $black)) {
                 $gfx->rect($xp/pt, -$yp/pt, 1/pt, 1/pt);
             }
         }
