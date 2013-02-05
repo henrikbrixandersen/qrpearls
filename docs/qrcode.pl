@@ -108,13 +108,7 @@ if ($preview) {
         helvetica => {
             regular	=> $pdf->corefont('Helvetica', -encode => $encoding),
             bold	=> $pdf->corefont('Helvetica-Bold', -encode => $encoding),
-            italic	=> $pdf->corefont('Helvetica-Oblique', -encode => $encoding),
         },
-        times => {
-            regular	=> $pdf->corefont('Times', -encode => $encoding),
-            bold	=> $pdf->corefont('Times-Bold', -encode => $encoding),
-            italic	=> $pdf->corefont('Times-Italic', -encode => $encoding),
-        }
         );
 
     # Title page
@@ -204,15 +198,14 @@ if ($preview) {
             }
 
             # Main pegboard
+            $gfx->save;
             $gfx->pegboard(33/mm, 40/mm, 144/mm);
             $gfx->linewidth(1/pt);
             $gfx->linejoin(1);
             $gfx->strokecolor('#aaaaaa');
             $gfx->stroke;
 
-            # TODO: Add 5, 10, 15, ... lines + numbers
             my $dia = 144/mm / pegs;
-            $gfx->save;
             $gfx->translate(33/mm, 40/mm + 144/mm);
             $gfx->linewidth(1/pt);
             $gfx->strokecolor('#000000');
