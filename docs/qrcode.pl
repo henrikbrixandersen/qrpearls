@@ -126,18 +126,38 @@ if ($preview) {
     $text->fillcolor('#ffffff');
     $text->text_center('QR Pearls');
 
-    # TODO: Add instructions
-
     $gfx->qrcode(65/mm, 145/mm, 75/mm, $qrcode);
 
-    # TODO: Improve parameters listing
-    $text->font($fonts{'helvetica'}{'regular'}, 20/pt);
+    # Parameters
     $text->fillcolor('#000000');
     $text->translate(105/mm, 120/mm);
-    my $realversion = ($size - 23) / 4 + 1;
-    $text->text_center("Version: $realversion (${size}x${size})" . ($version == 0 ? ' (Automatic)' : ''));
+    $text->font($fonts{'helvetica'}{'bold'}, 20/pt);
+    $text->text_center('Parameters');
+    $text->font($fonts{'helvetica'}{'regular'}, 18/pt);
+    $text->translate(33/mm, 110/mm);
+    $text->text("Version:");
     $text->cr(-25/pt);
-    $text->text_center("Error Correction: $level");
+    $text->text("Error Correction:");
+    $text->cr(-50/pt);
+
+    $text->translate(100/mm, 110/mm);
+    my $realversion = ($size - 23) / 4 + 1;
+    $text->text("$realversion (${size}x${size})" . ($version == 0 ? ' (Automatic)' : ''));
+    $text->cr(-25/pt);
+    my %levels = (L => 'Low', M => 'Medium', Q => 'Quartile', H => 'High');
+    $text->text($levels{$level});
+
+    # Total required materials
+    $text->translate(105/mm, 70/mm);
+    $text->font($fonts{'helvetica'}{'bold'}, 20/pt);
+    $text->text_center('Required Materials');
+    $text->font($fonts{'helvetica'}{'regular'}, 18/pt);
+    $text->translate(33/mm, 60/mm);
+    $text->text("Peg Boards (29x29):");
+    $text->cr(-25/pt);
+    $text->text("Black Beads:");
+    $text->cr(-25/pt);
+    $text->text("White Beads:");
 
     # TODO: Add total required materials (peg boards, beads)
 
@@ -161,6 +181,16 @@ if ($preview) {
             $gfx->linejoin(0);
             $gfx->strokecolor('#aaaaaa');
             $gfx->stroke;
+
+            # Total required materials
+            $text->translate(33/mm, 255/mm);
+            $text->font($fonts{'helvetica'}{'bold'}, 18/pt);
+            $text->text('Required Materials');
+            $text->font($fonts{'helvetica'}{'regular'}, 16/pt);
+            $text->translate(33/mm, 245/mm);
+            $text->text("Black Beads:");
+            $text->cr(-25/pt);
+            $text->text("White Beads:");
 
             # TODO: Add required materials
 
