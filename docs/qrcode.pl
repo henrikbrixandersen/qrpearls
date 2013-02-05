@@ -137,7 +137,7 @@ if ($preview) {
     $text->translate(33/mm, 110/mm);
     $text->text("Version:");
     $text->cr(-25/pt);
-    $text->text("Error Correction:");
+    $text->text("Error correction:");
     $text->cr(-50/pt);
 
     $text->translate(100/mm, 110/mm);
@@ -153,11 +153,11 @@ if ($preview) {
     $text->text_center('Required Materials');
     $text->font($fonts{'helvetica'}{'regular'}, 18/pt);
     $text->translate(33/mm, 60/mm);
-    $text->text("Peg Boards (29x29):");
+    $text->text("Peg boards (29x29):");
     $text->cr(-25/pt);
-    $text->text("Black Beads:");
+    $text->text("Black beads:");
     $text->cr(-25/pt);
-    $text->text("White Beads:");
+    $text->text("White beads:");
 
     # TODO: Add total required materials (peg boards, beads)
 
@@ -182,15 +182,15 @@ if ($preview) {
             $gfx->strokecolor('#aaaaaa');
             $gfx->stroke;
 
-            # Total required materials
+            # Required materials
             $text->translate(33/mm, 255/mm);
             $text->font($fonts{'helvetica'}{'bold'}, 18/pt);
             $text->text('Required Materials');
             $text->font($fonts{'helvetica'}{'regular'}, 16/pt);
             $text->translate(33/mm, 245/mm);
-            $text->text("Black Beads:");
+            $text->text("Black beads:");
             $text->cr(-25/pt);
-            $text->text("White Beads:");
+            $text->text("White beads:");
 
             # TODO: Add required materials
 
