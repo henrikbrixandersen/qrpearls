@@ -191,7 +191,7 @@ if ($preview) {
                 $gfx->linewidth(1/pt);
                 $gfx->linejoin(1);
                 $gfx->strokecolor('#aaaaaa');
-                $gfx->fillcolor('#555555');
+                $gfx->fillcolor('#aaaaaa');
                 for (my $overviewy = 0; $overviewy < $boards; $overviewy++) {
                     for (my $overviewx = 0; $overviewx < $boards; $overviewx++) {
                         $gfx->pegboard($posx + $overviewx * $overview, $posy - $overview - $overviewy * $overview, $overview);
