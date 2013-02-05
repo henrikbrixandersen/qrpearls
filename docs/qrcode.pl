@@ -134,8 +134,6 @@ if ($preview) {
     $text->font($fonts{'helvetica'}{'regular'}, 20/pt);
     $text->fillcolor('#000000');
     $text->translate(105/mm, 120/mm);
-    $text->text_center("Text: $content");
-    $text->cr(-25/pt);
     my $realversion = ($size - 23) / 4 + 1;
     $text->text_center("Version: $realversion (${size}x${size})" . ($version == 0 ? ' (Automatic)' : ''));
     $text->cr(-25/pt);
