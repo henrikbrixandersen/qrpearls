@@ -217,11 +217,12 @@ if ($preview) {
             $gfx->linewidth(1/pt);
             $gfx->strokecolor('#000000');
             $gfx->fillcolor('#000000');
+            # Flip QR code before generating peg boards in order to iron the QR code "on the back"
+            $qrcode->flip(dir => 'h');
             for (my $beadx = 0; $beadx < pegs; $beadx++) {
                 for (my $beady = 0; $beady < pegs; $beady++) {
                     my $x = $beadx * $dia + $dia / 2;
                     my $y = - $beady * $dia - $dia / 2;
-                    # TODO: Flip QR code in x
                     my $color = $qrcode->getpixel(x => $boardx * pegs + $beadx, y => $boardy * pegs + $beady);
                     $gfx->circle($x, $y, $dia / 6);
                     if (defined($color)) {
