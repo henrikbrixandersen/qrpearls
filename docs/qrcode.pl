@@ -128,7 +128,7 @@ if ($preview) {
 
     # TODO: Add instructions
 
-    $gfx->qrcode(80/mm, 170/mm, 50/mm, $qrcode);
+    $gfx->qrcode(65/mm, 145/mm, 75/mm, $qrcode);
 
     # TODO: Improve parameters listing
     $text->font($fonts{'helvetica'}{'regular'}, 20/pt);
