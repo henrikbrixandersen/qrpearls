@@ -96,8 +96,7 @@ if ($preview) {
     my @qrcode;
     for (my $x = 0; $x < $size; $x++) {
         my @col;
-        for (my $y = $size - 1; $y >= 0; $y--) {
-            # Beware: Translation from IV quadrant to I quadrant
+        for (my $y = 0; $y < $size; $y++) {
             my $color = $img->getpixel(x => $x, y => $y);
             push @col, $color->equals(other => $black) ? 1 : 0;
         }
@@ -215,13 +214,42 @@ if ($preview) {
             }
 
             # Main pegboard
-            # TODO: Add 5, 10, 15, ... lines + numbers
-            # TODO: Add beads
             $gfx->pegboard(33/mm, 40/mm, 144/mm);
             $gfx->linewidth(1/pt);
             $gfx->linejoin(1);
             $gfx->strokecolor('#aaaaaa');
             $gfx->stroke;
+
+            # TODO: Add 5, 10, 15, ... lines + numbers
+            my $dia = 144/mm / pegs;
+            $gfx->save;
+            $gfx->translate(33/mm, 40/mm + 144/mm);
+            $gfx->linewidth(1/pt);
+            $gfx->strokecolor('#000000');
+            $gfx->fillcolor('#000000');
+            for (my $beadx = 0; $beadx < pegs; $beadx++) {
+                for (my $beady = 0; $beady < pegs; $beady++) {
+                    my $x = $beadx * $dia + $dia / 2;
+                    my $y = - $beady * $dia - $dia / 2;
+                    # TODO: Flip QR code in x
+                    my $bead = $qrcode[$boardx * pegs + $beadx][$boardy * pegs + $beady];
+                    $gfx->circle($x, $y, $dia / 6);
+                    if (defined($bead)) {
+                        $gfx->circle($x, $y, $dia / 2 - 0.5/pt);
+                        if ($bead) {
+                            $gfx->fillstroke(1);
+                        } else {
+                            $gfx->stroke;
+                        }
+                    } else {
+                        $gfx->save;
+                        $gfx->strokecolor('#aaaaaa');
+                        $gfx->stroke;
+                        $gfx->restore;
+                    }
+                }
+            }
+            $gfx->restore;
         }
     }
 
@@ -259,14 +287,14 @@ sub PDF::API2::Content::qrcode {
     my $scale = $size / @qrcode;
 
     $gfx->save;
-    $gfx->translate($x, $y);
+    $gfx->translate($x, $y + $size);
     $gfx->scale($scale, $scale);
     $gfx->fillcolor('#000000');
 
     for (my $xp = 0; $xp < @qrcode; $xp++) {
         for (my $yp = 0; $yp < @qrcode; $yp++) {
             if ($qrcode[$xp][$yp]) {
-                $gfx->rect($xp/pt, $yp/pt, 1/pt, 1/pt);
+                $gfx->rect($xp/pt, -$yp/pt, 1/pt, 1/pt);
             }
         }
     }
