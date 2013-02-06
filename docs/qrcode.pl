@@ -161,6 +161,9 @@ if ($preview) {
 
     # TODO: Add total required materials (peg boards, beads)
 
+    # Flip QR code before generating peg boards in order to iron the QR code "on the back"
+    $qrcode->flip(dir => 'h');
+
     # Fill in peg board pages
     my $boards = ceil($size / pegs);
     for (my $boardy = 0; $boardy < $boards; $boardy++) {
@@ -238,8 +241,6 @@ if ($preview) {
             $gfx->linewidth(1/pt);
             $gfx->strokecolor('#000000');
             $gfx->fillcolor('#000000');
-            # Flip QR code before generating peg boards in order to iron the QR code "on the back"
-            $qrcode->flip(dir => 'h');
             for (my $beadx = 0; $beadx < pegs; $beadx++) {
                 for (my $beady = 0; $beady < pegs; $beady++) {
                     my $x = $beadx * $dia + $dia / 2;
