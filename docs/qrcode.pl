@@ -168,6 +168,8 @@ if ($preview) {
     my $boards = ceil($size / pegs);
     for (my $boardy = 0; $boardy < $boards; $boardy++) {
         for (my $boardx = 0; $boardx < $boards; $boardx++) {
+            my $blackbeads = 0;
+            my $whitebeads = 0;
             $page = $pdf->page;
             $gfx = $page->gfx;
             $text = $page->text;
@@ -184,18 +186,6 @@ if ($preview) {
             $gfx->linejoin(0);
             $gfx->strokecolor('#aaaaaa');
             $gfx->stroke;
-
-            # Required materials
-            $text->translate(33/mm, 255/mm);
-            $text->font($fonts{'helvetica'}{'bold'}, 18/pt);
-            $text->text('Required Materials');
-            $text->font($fonts{'helvetica'}{'regular'}, 16/pt);
-            $text->translate(33/mm, 245/mm);
-            $text->text("Black beads:");
-            $text->cr(-25/pt);
-            $text->text("White beads:");
-
-            # TODO: Add required materials
 
             # Peg boards overview
             if ($boards > 1) {
@@ -251,8 +241,10 @@ if ($preview) {
                         $gfx->circle($x, $y, $dia / 2 - 0.5/pt);
                         if ($color->equals(other => $black)) {
                             $gfx->fillstroke(1);
+                            $blackbeads++;
                         } else {
                             $gfx->stroke;
+                            $whitebeads++;
                         }
                     } else {
                         $gfx->save;
@@ -263,6 +255,21 @@ if ($preview) {
                 }
             }
             $gfx->restore;
+
+            # Required materials
+            $text->translate(33/mm, 255/mm);
+            $text->font($fonts{'helvetica'}{'bold'}, 18/pt);
+            $text->fillcolor('#000000');
+            $text->text('Required Materials');
+            $text->font($fonts{'helvetica'}{'regular'}, 16/pt);
+            $text->translate(33/mm, 245/mm);
+            $text->text("Black beads:");
+            $text->cr(-25/pt);
+            $text->text("White beads:");
+            $text->translate(80/mm, 245/mm);
+            $text->text($blackbeads);
+            $text->cr(-25/pt);
+            $text->text($whitebeads);
         }
     }
 
