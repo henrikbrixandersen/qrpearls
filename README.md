@@ -4,7 +4,7 @@ Perl Web App for Generating QR Code Beads Designs
 
 Motivation
 ----------
-The QR Pearls web app was written to be used in the Tech Lab at [Aarhus Hovedbibliotek](http://www.aakb.dk/biblioteker/hovedbiblioteket) installation in February, 2013.
+The QR Pearls web app was written to be used in the Tech Lab installation at [Aarhus Hovedbibliotek](http://www.aakb.dk/biblioteker/hovedbiblioteket) in February, 2013.
 The Tech Lab installation is a collaboration between [Aarhus Folkelab](http://www.folkelab.dk/) and [Open Space Aarhus](http://www.osaa.dk/).
 
 Features
