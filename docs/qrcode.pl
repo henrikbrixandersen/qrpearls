@@ -150,7 +150,7 @@ if ($preview) {
     # Total required materials
     $text->translate(105/mm, 70/mm);
     $text->font($fonts{'helvetica'}{'bold'}, 20/pt);
-    $text->text_center('Required Materials');
+    $text->text_center('Total Required Materials');
     $text->font($fonts{'helvetica'}{'regular'}, 18/pt);
     $text->translate(33/mm, 60/mm);
     $text->text("Peg boards (29x29):");
@@ -159,17 +159,18 @@ if ($preview) {
     $text->cr(-25/pt);
     $text->text("White beads:");
 
-    # TODO: Add total required materials (peg boards, beads)
-
     # Flip QR code before generating peg boards in order to iron the QR code "on the back"
     $qrcode->flip(dir => 'h');
+
+    my $totalblackbeads;
+    my $totalwhitebeads;
 
     # Fill in peg board pages
     my $boards = ceil($size / pegs);
     for (my $boardy = 0; $boardy < $boards; $boardy++) {
         for (my $boardx = 0; $boardx < $boards; $boardx++) {
-            my $blackbeads = 0;
-            my $whitebeads = 0;
+            my $blackbeads;
+            my $whitebeads;
             $page = $pdf->page;
             $gfx = $page->gfx;
             $text = $page->text;
@@ -270,8 +271,22 @@ if ($preview) {
             $text->text($blackbeads);
             $text->cr(-25/pt);
             $text->text($whitebeads);
+
+            $totalblackbeads += $blackbeads;
+            $totalwhitebeads += $whitebeads;
         }
     }
+
+    # Fill in total required materials on front page
+    $page = $pdf->openpage(1);
+    $text = $page->text;
+    $text->font($fonts{'helvetica'}{'regular'}, 18/pt);
+    $text->translate(110/mm, 60/mm);
+    $text->text($boards ** 2);
+    $text->cr(-25/pt);
+    $text->text($totalblackbeads);
+    $text->cr(-25/pt);
+    $text->text($totalwhitebeads);
 
     # Add footer to all pages
     for (1..$pdf->pages) {
