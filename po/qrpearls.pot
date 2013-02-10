@@ -1,0 +1,198 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-02-10 11:32+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../docs/index.pl:26
+msgid "Home"
+msgstr ""
+
+#: ../docs/index.pl:30
+msgid "About"
+msgstr ""
+
+#: ../tmpl/about.tmpl:2
+msgid "About QR Pearls"
+msgstr ""
+
+#: ../tmpl/about.tmpl:3
+msgid "Motivation"
+msgstr ""
+
+#: ../tmpl/about.tmpl:4
+msgid ""
+"The QR Pearls web app was written to be used in the Tech Lab installation at"
+msgstr ""
+
+#: ../tmpl/about.tmpl:6
+msgid "Aarhus Hovedbibliotek"
+msgstr ""
+
+#: ../tmpl/about.tmpl:8
+msgid "in February, 2013. The Tech Lab installation is a collaboration between"
+msgstr ""
+
+#: ../tmpl/about.tmpl:10
+msgid "Aarhus Folkelab"
+msgstr ""
+
+#: ../tmpl/about.tmpl:12
+msgid "and"
+msgstr ""
+
+#: ../tmpl/about.tmpl:14
+msgid "Open Space Aarhus"
+msgstr ""
+
+#: ../tmpl/about.tmpl:16
+msgid "Features"
+msgstr ""
+
+#: ../tmpl/about.tmpl:18
+msgid "Automatic or manual QR code version selection"
+msgstr ""
+
+#: ../tmpl/about.tmpl:19
+msgid "QR code error correction level selection"
+msgstr ""
+
+#: ../tmpl/about.tmpl:20
+msgid "Preview of generated QR code"
+msgstr ""
+
+#: ../tmpl/about.tmpl:21
+msgid "Generates PDF file with beads design"
+msgstr ""
+
+#: ../tmpl/about.tmpl:22
+msgid "Mirrored beads design, so QR code is ironed on the back, not the front"
+msgstr ""
+
+#: ../tmpl/about.tmpl:23
+msgid "UTF-8 text string support"
+msgstr ""
+
+#: ../tmpl/about.tmpl:26
+msgid "Limitations"
+msgstr ""
+
+#: ../tmpl/about.tmpl:27
+msgid ""
+"Generated design is intended for use with 29x29 peg boards (e.g. product code"
+msgstr ""
+
+#: ../tmpl/about.tmpl:29
+msgid "from Hama Beads)."
+msgstr ""
+
+#: ../tmpl/about.tmpl:31
+msgid "License"
+msgstr ""
+
+#: ../tmpl/about.tmpl:32
+msgid ""
+"The generated QR codes are of course free to use, no license restrictions at "
+"all. The source code of the QR Pearls web app is"
+msgstr ""
+
+#: ../tmpl/about.tmpl:33
+msgid "available"
+msgstr ""
+
+#: ../tmpl/about.tmpl:34
+msgid "under the"
+msgstr ""
+
+#: ../tmpl/about.tmpl:35
+msgid "2-clause\tBSD license"
+msgstr ""
+
+#: ../tmpl/about.tmpl:37
+msgid "Do Not Track Policy"
+msgstr ""
+
+#: ../tmpl/about.tmpl:38
+msgid ""
+"This site uses cookies to store the user-selected language. The cookies are "
+"so-called session cookies, which are deleted when the user closes the "
+"browser. The site is fully usable with cookies disabled. Default language is "
+"determined by the preferred language information sent by the browser."
+msgstr ""
+
+#: ../tmpl/header.tmpl:27
+msgid "QR Pearls"
+msgstr ""
+
+#: ../tmpl/header.tmpl:27
+msgid "A QR Code Beads Design Generator"
+msgstr ""
+
+#: ../tmpl/home.tmpl:4
+msgid "Error!"
+msgstr ""
+
+#: ../tmpl/home.tmpl:4
+msgid "Please specify some text first"
+msgstr ""
+
+#: ../tmpl/home.tmpl:9 ../tmpl/home.tmpl:96
+msgid "Preview"
+msgstr ""
+
+#: ../tmpl/home.tmpl:14
+msgid "Close"
+msgstr ""
+
+#: ../tmpl/home.tmpl:19
+msgid "Text"
+msgstr ""
+
+#: ../tmpl/home.tmpl:25
+msgid "Version"
+msgstr ""
+
+#: ../tmpl/home.tmpl:28
+msgid "Automatic"
+msgstr ""
+
+#: ../tmpl/home.tmpl:73
+msgid "Error Correction"
+msgstr ""
+
+#: ../tmpl/home.tmpl:77
+msgid "Low"
+msgstr ""
+
+#: ../tmpl/home.tmpl:81
+msgid "Medium"
+msgstr ""
+
+#: ../tmpl/home.tmpl:85
+msgid "Quartile"
+msgstr ""
+
+#: ../tmpl/home.tmpl:89
+msgid "High"
+msgstr ""
+
+#: ../tmpl/home.tmpl:95
+msgid "Download"
+msgstr ""
+
+#: ../tmpl/home.tmpl:97
+msgid "Reset"
+msgstr ""

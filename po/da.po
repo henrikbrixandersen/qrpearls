@@ -1,0 +1,209 @@
+# Danish translations for QR Pearls package.
+# Copyright (C) 2013 Henrik Brix Andersen
+# This file is distributed under the same license as the QR Pearls package.
+# Henrik Brix Andersen <henrik@brixandersen>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: QR Pearls\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-02-10 11:32+0100\n"
+"PO-Revision-Date: 2013-02-09 22:10+0100\n"
+"Last-Translator: Henrik Brix Andersen <henrik@brixandersen.dk>\n"
+"Language-Team: Danish\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../docs/index.pl:26
+msgid "Home"
+msgstr "Hjem"
+
+#: ../docs/index.pl:30
+msgid "About"
+msgstr "Om"
+
+#: ../tmpl/about.tmpl:2
+msgid "About QR Pearls"
+msgstr "Om QR Pearls"
+
+#: ../tmpl/about.tmpl:3
+msgid "Motivation"
+msgstr "Motivation"
+
+#: ../tmpl/about.tmpl:4
+msgid ""
+"The QR Pearls web app was written to be used in the Tech Lab installation at"
+msgstr "QR Pearls webapp'en blev udviklet til brug i Tech Lab-installation på"
+
+#: ../tmpl/about.tmpl:6
+msgid "Aarhus Hovedbibliotek"
+msgstr "Aarhus Hovedbibliotek"
+
+#: ../tmpl/about.tmpl:8
+msgid "in February, 2013. The Tech Lab installation is a collaboration between"
+msgstr "i februar 2013. Tech Lab-installationen er et samarbejde mellem"
+
+#: ../tmpl/about.tmpl:10
+msgid "Aarhus Folkelab"
+msgstr "Aarhus Folkelab"
+
+#: ../tmpl/about.tmpl:12
+msgid "and"
+msgstr "og"
+
+#: ../tmpl/about.tmpl:14
+msgid "Open Space Aarhus"
+msgstr "Open Space Aarhus"
+
+#: ../tmpl/about.tmpl:16
+msgid "Features"
+msgstr "Funktioner"
+
+#: ../tmpl/about.tmpl:18
+msgid "Automatic or manual QR code version selection"
+msgstr "Automatisk eller manuelt valg af QR-kode version"
+
+#: ../tmpl/about.tmpl:19
+msgid "QR code error correction level selection"
+msgstr "Valg af QR-kode fejlkorrigeringsniveau"
+
+#: ../tmpl/about.tmpl:20
+msgid "Preview of generated QR code"
+msgstr "Forhåndsvisning af genererede QR-koder"
+
+#: ../tmpl/about.tmpl:21
+msgid "Generates PDF file with beads design"
+msgstr "Generering af PDF-fil med perleplademønster"
+
+#: ../tmpl/about.tmpl:22
+msgid "Mirrored beads design, so QR code is ironed on the back, not the front"
+msgstr ""
+"Spejlvendt perleplademønster, så QR-koden bliver strøget på bagsiden i "
+"stedet for forsiden"
+
+#: ../tmpl/about.tmpl:23
+msgid "UTF-8 text string support"
+msgstr "Understøttelse af UTF-8 tekststrenge"
+
+#: ../tmpl/about.tmpl:26
+msgid "Limitations"
+msgstr "Begrænsninger"
+
+#: ../tmpl/about.tmpl:27
+msgid ""
+"Generated design is intended for use with 29x29 peg boards (e.g. product code"
+msgstr ""
+"Det genererede perleplademønster er tiltænkt til brug med perleplader med "
+"29x29 stifter (fx produktkode"
+
+#: ../tmpl/about.tmpl:29
+msgid "from Hama Beads)."
+msgstr "fra Hama Perler)"
+
+#: ../tmpl/about.tmpl:31
+msgid "License"
+msgstr "Licens"
+
+#: ../tmpl/about.tmpl:32
+msgid ""
+"The generated QR codes are of course free to use, no license restrictions at "
+"all. The source code of the QR Pearls web app is"
+msgstr ""
+"De genererede QR-koder er naturligvis til fri afbenyttelse uden "
+"licensrestriktioner af nogen art. Kildeteksten til QR Pearls webapp'en er"
+
+#: ../tmpl/about.tmpl:33
+msgid "available"
+msgstr "tilgængelig"
+
+#: ../tmpl/about.tmpl:34
+msgid "under the"
+msgstr "under"
+
+#: ../tmpl/about.tmpl:35
+msgid "2-clause\tBSD license"
+msgstr "2-clause BSD-licensen"
+
+#: ../tmpl/about.tmpl:37
+msgid "Do Not Track Policy"
+msgstr "Persondatapolitik"
+
+#: ../tmpl/about.tmpl:38
+msgid ""
+"This site uses cookies to store the user-selected language. The cookies are "
+"so-called session cookies, which are deleted when the user closes the "
+"browser. The site is fully usable with cookies disabled. Default language is "
+"determined by the preferred language information sent by the browser."
+msgstr ""
+"Denne hjemmeside benytter cookies til at gemme brugerens valg af sprog. De "
+"anvendte cookies er såkaldete session-cookies, som slettes når brugeren "
+"lukker browseren. Hjemmesiden er fuldt brugbar med cookies slået fra. "
+"Standardsprog erbestemt af listen over foretrunkne sprog sat i brugerens "
+"browser."
+
+#: ../tmpl/header.tmpl:27
+msgid "QR Pearls"
+msgstr "QR Pearls"
+
+#: ../tmpl/header.tmpl:27
+msgid "A QR Code Beads Design Generator"
+msgstr "QR-kode perleplademønster generator"
+
+#: ../tmpl/home.tmpl:4
+msgid "Error!"
+msgstr "Fejl!"
+
+#: ../tmpl/home.tmpl:4
+msgid "Please specify some text first"
+msgstr "Angiv venligst en tekststreng først"
+
+#: ../tmpl/home.tmpl:9 ../tmpl/home.tmpl:96
+msgid "Preview"
+msgstr "Forhåndsvisning"
+
+#: ../tmpl/home.tmpl:14
+msgid "Close"
+msgstr "Luk"
+
+#: ../tmpl/home.tmpl:19
+msgid "Text"
+msgstr "Tekst"
+
+#: ../tmpl/home.tmpl:25
+msgid "Version"
+msgstr "Version"
+
+#: ../tmpl/home.tmpl:28
+msgid "Automatic"
+msgstr "Automatisk"
+
+#: ../tmpl/home.tmpl:73
+msgid "Error Correction"
+msgstr "Fejlkorrigering"
+
+#: ../tmpl/home.tmpl:77
+msgid "Low"
+msgstr "Lav"
+
+#: ../tmpl/home.tmpl:81
+msgid "Medium"
+msgstr "Medium"
+
+#: ../tmpl/home.tmpl:85
+msgid "Quartile"
+msgstr "Kvartil"
+
+#: ../tmpl/home.tmpl:89
+msgid "High"
+msgstr "Høj"
+
+#: ../tmpl/home.tmpl:95
+msgid "Download"
+msgstr "Hent"
+
+#: ../tmpl/home.tmpl:97
+msgid "Reset"
+msgstr "Nulstil"
