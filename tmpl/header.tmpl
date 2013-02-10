@@ -7,7 +7,7 @@
 		<meta name="description" content="_("Perl Web App for Generating QR Code Beads Designs")">
 		<meta name="author" content="Henrik Brix Andersen">
 		<link href="/css/bootstrap.min.css" rel="stylesheet">
-		<link href="/css/bootstrap-responsive.min.css" rel="stylesheet" media="(max-width: 767px)">
+		<link href="/css/bootstrap-responsive.min.css" rel="stylesheet" media="(max-width: 800px)">
 		<link href="/css/custom.css" rel="stylesheet">
   </head>
   <body>
@@ -23,6 +23,6 @@
 						<li<TMPL_IF NAME=SELECTED> class="active"</TMPL_IF>><a href="<TMPL_VAR NAME=PATH>"><i class="icon-<TMPL_VAR NAME=ICON>"></i> <TMPL_VAR NAME=NAME></a></li>
 					</TMPL_LOOP>
 				</ul>
-				<div class="clearfix hidden visible-phone"></div>
+				<div class="clearfix hidden visible-phone visible-tablet"></div>
 				<h1>_("QR Pearls") <small>_("A QR Code Beads Design Generator")</small></h1>
 			</div>
