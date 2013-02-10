@@ -4,6 +4,7 @@ use strict;
 
 use POSIX qw/ceil LC_MESSAGES setlocale strftime/;
 use CGI qw/-utf8/;
+use I18N::AcceptLanguage;
 use Locale::Messages qw/bindtextdomain/;
 use Locale::TextDomain qw/qrpearls/;
 use Imager::QRCode;
