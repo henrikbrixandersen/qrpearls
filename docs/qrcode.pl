@@ -2,9 +2,10 @@
 
 use strict;
 
-use POSIX qw/ceil strftime/;
+use POSIX qw/ceil LC_MESSAGES setlocale strftime/;
 use CGI qw/-utf8/;
-use Locale::TextDomain;
+use Locale::Messages qw/bindtextdomain/;
+use Locale::TextDomain qw/qrpearls/;
 use Imager::QRCode;
 use SVG qw/-nocredits => 1/;
 use PDF::API2;
@@ -15,11 +16,24 @@ use constant pt => 1;
 
 use constant pegs => 29;
 
+BEGIN {
+    # Select the pure-perl implementation, since xs version does not
+    # work with mod_perl2
+    Locale::Messages->select_package('gettext_pp');
+};
+
+# Directories
+my $localedir = "$ENV{BASE_DIRECTORY}/locale";
+
 # QR code defaults
 my $preview = 0;
 my $level = 'L';
 my $version = 0;
 my $content = 'http://qr.brixandersen.dk';
+
+# Languages
+my @langs = qw/da en/;
+my $lang = 'en';
 
 # Initialize CGI and catch errors
 my $q = CGI->new;
@@ -28,6 +42,18 @@ if ($error) {
     print $q->header(-status => $error);
     exit 0;
 }
+
+# Determine language
+if ($q->cookie('lang') ~~ @langs) {
+    $lang = $q->cookie('lang');
+} else {
+    my $accept = I18N::AcceptLanguage->new(defaultLanguage => $lang);
+    my $acceptLang = $accept->accepts($ENV{HTTP_ACCEPT_LANGUAGE}, \@langs);
+    $lang = $acceptLang if ($acceptLang);
+}
+$ENV{'LANGUAGE'} = $lang;
+bindtextdomain('qrpearls', $localedir);
+setlocale(LC_MESSAGES, '');
 
 # Validate parameters
 if ($q->param('preview') == 1) {
@@ -97,8 +123,8 @@ if ($preview) {
     my $date = strftime("D:%Y%m%d%H%M%S%z'", localtime);
     substr($date, -3, 0, "'");
     $pdf->info(Author		=> 'Henrik Brix Andersen',
-               Title		=> 'QR Pearls',
-               Subject		=> 'QR Code Beads Design',
+               Title		=> __("QR Pearls"),
+               Subject		=> __("QR Code Beads Design"),
                Producer		=> 'http://qr.brixandersen.dk',
                CreationDate	=> $date);
 
@@ -124,7 +150,7 @@ if ($preview) {
     $text->translate(105/mm, 255/mm);
     $text->font($fonts{'helvetica'}{'bold'}, 72/pt);
     $text->fillcolor('#ffffff');
-    $text->text_center('QR Pearls');
+    $text->text_center(__("QR Pearls"));
 
     $gfx->qrcode(65/mm, 145/mm, 75/mm, $qrcode);
 
@@ -132,32 +158,32 @@ if ($preview) {
     $text->fillcolor('#000000');
     $text->translate(105/mm, 120/mm);
     $text->font($fonts{'helvetica'}{'bold'}, 20/pt);
-    $text->text_center('Parameters');
+    $text->text_center(__("Parameters"));
     $text->font($fonts{'helvetica'}{'regular'}, 18/pt);
     $text->translate(33/mm, 110/mm);
-    $text->text("Version:");
+    $text->text(__("Version:"));
     $text->cr(-25/pt);
-    $text->text("Error correction:");
+    $text->text(__("Error correction:"));
     $text->cr(-50/pt);
 
     $text->translate(100/mm, 110/mm);
     my $realversion = ($size - 23) / 4 + 1;
-    $text->text("$realversion (${size}x${size})" . ($version == 0 ? ' (Automatic)' : ''));
+    $text->text("$realversion (${size}x${size})" . ($version == 0 ? __(" (Automatic)") : ''));
     $text->cr(-25/pt);
-    my %levels = (L => 'Low', M => 'Medium', Q => 'Quartile', H => 'High');
+    my %levels = (L => __("Low"), M => __("Medium"), Q => __("Quartile"), H => __("High"));
     $text->text($levels{$level});
 
     # Total required materials
     $text->translate(105/mm, 70/mm);
     $text->font($fonts{'helvetica'}{'bold'}, 20/pt);
-    $text->text_center('Total Required Materials');
+    $text->text_center(__("Total Materials"));
     $text->font($fonts{'helvetica'}{'regular'}, 18/pt);
     $text->translate(33/mm, 60/mm);
-    $text->text("Peg boards (29x29):");
+    $text->text(__("Peg boards (29x29):"));
     $text->cr(-25/pt);
-    $text->text("Black beads:");
+    $text->text(__("Black beads:"));
     $text->cr(-25/pt);
-    $text->text("White beads:");
+    $text->text(__("White beads:"));
 
     # Flip QR code before generating peg boards in order to iron the QR code "on the back"
     $qrcode->flip(dir => 'h');
@@ -180,7 +206,7 @@ if ($preview) {
             $text->translate(105/mm, 280/mm);
             $text->font($fonts{'helvetica'}{'regular'}, 8/pt);
             $text->fillcolor('#000000');
-            $text->text_center('QR Pearls');
+            $text->text_center(__("QR Pearls"));
             $gfx->move(20/mm, 280/mm - 4/pt);
             $gfx->hline(190/mm);
             $gfx->linewidth(1/pt);
@@ -261,12 +287,12 @@ if ($preview) {
             $text->translate(33/mm, 255/mm);
             $text->font($fonts{'helvetica'}{'bold'}, 18/pt);
             $text->fillcolor('#000000');
-            $text->text('Required Materials');
+            $text->text(__("Materials"));
             $text->font($fonts{'helvetica'}{'regular'}, 16/pt);
             $text->translate(33/mm, 245/mm);
-            $text->text("Black beads:");
+            $text->text(__("Black beads:"));
             $text->cr(-25/pt);
-            $text->text("White beads:");
+            $text->text(__("White beads:"));
             $text->translate(80/mm, 245/mm);
             $text->text($blackbeads);
             $text->cr(-25/pt);
@@ -304,9 +330,9 @@ if ($preview) {
         $text->translate(20/mm + 1/pt, 10/mm);
         $text->font($fonts{'helvetica'}{'regular'}, 8/pt);
         $text->fillcolor('#000000');
-        $text->text('Generated by http://qr.brixandersen.dk');
+        $text->text(__("Generated by http://qr.brixandersen.dk"));
         $text->translate(190/mm - 1/pt, 10/mm);
-        $text->text_right("Page $_/" . $pdf->pages);
+        $text->text_right(__("Page") . " $_/" . $pdf->pages);
     }
 
     print $q->header(-expires => '0',

@@ -1,31 +1,31 @@
 <TMPL_INCLUDE NAME="header.tmpl">
 			<div id="alert-no-text" class="alert alert-error hide">
 				<button type="button" id="alert-no-text-close" class="close">&times;</button>
-				<strong>Error!</strong> Please specify some text first
+				<strong>_("Error!")</strong> _("Please specify some text first")
 			</div>
 			<div id="modal-preview" class="modal hide fade" tabindex="-1">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h3>Preview</h3>
+					<h3>_("Preview")</h3>
 				</div>
 				<div class="modal-body pagination-centered">
 				</div>
 				<div class="modal-footer">
-					<a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
+					<a href="#" class="btn btn-primary" data-dismiss="modal">_("Close")</a>
 				</div>
 			</div>
 			<form id="form" class="form-horizontal" action="/qrcode.pl" method="get">
 				<div class="control-group">
-					<label class="control-label" for="form-text">Text</label>
+					<label class="control-label" for="form-text">_("Text")</label>
 					<div class="controls">
-						<input class="input-xlarge" type="text" id="form-text" name="text" placeholder="QR Code Text">
+						<input class="input-xlarge" type="text" id="form-text" name="text" placeholder="_("QR Code Text")">
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="form-version">Version</label>
+					<label class="control-label" for="form-version">_("Version")</label>
 					<div class="controls">
 						<select id="form-version" name="version">
-							<option value="0" selected>Automatic</option>
+							<option value="0" selected>_("Automatic")</option>
               <option value="1">1 (23x23)</option>
               <option value="2">2 (27x27)</option>
               <option value="3">3 (31x31)</option>
@@ -70,31 +70,31 @@
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label">Error Correction</label>
+					<label class="control-label">_("Error Correction")</label>
 					<div class="controls">
 						<label class="radio inline">
 							<input type="radio" id="form-level-l" name="level" value="L" checked>
-							Low
+							_("Low")
 						</label>
 						<label class="radio inline">
 							<input type="radio" id="form-level-m" name="level" value="M">
-							Medium
+							_("Medium")
 						</label>
 						<label class="radio inline">
 							<input type="radio" id="form-level-q" name="level" value="Q">
-							Quartile
+							_("Quartile")
 						</label>
 						<label class="radio inline">
 							<input type="radio" id="form-level-h" name="level" value="H">
-							High
+							_("High")
 						</label>
 					</div>
 				</div>
 				<div class="control-group">
 					<div class="controls">
-						<button type="submit" class="btn btn-primary"><i class="icon-download icon-white"></i> Download</button>
-						<button type="button" id="form-preview" class="btn"><i class="icon-search"></i> Preview</button>
-						<button type="reset" class="btn"><i class="icon-remove"></i> Reset</button>
+						<button type="submit" class="btn btn-primary"><i class="icon-download icon-white"></i> _("Download")</button>
+						<button type="button" id="form-preview" class="btn"><i class="icon-search"></i> _("Preview")</button>
+						<button type="reset" class="btn"><i class="icon-remove"></i> _("Reset")</button>
 					</div>
 				</div>
 			</form>
